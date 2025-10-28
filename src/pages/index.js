@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>FortyOne Built | Built with Purpose.TEST </title>
+        <title>FortyOne Built | Built with Purpose.</title>
         <meta
           name="description"
           content="Faith-driven web development — American born. Texas built. Modern, clean, purpose-driven websites crafted with excellence."
