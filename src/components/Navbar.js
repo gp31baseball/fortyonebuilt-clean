@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -21,7 +22,7 @@ export default function Navbar() {
           : "py-6 bg-[#0A1A2F]/90 border-[#1C2A45]"
       }`}
     >
-      {/* === Top Gradient Line === */}
+      {/* === Top Texas Gradient Line === */}
       <div className="w-full h-[2px] bg-[linear-gradient(90deg,#C21F1F,#F5F3E7,#0A1A2F,#C21F1F)] bg-[length:200%_200%] animate-[gradientShift_10s_linear_infinite]" />
 
       <div className="flex justify-between items-center px-6 md:px-10">
@@ -37,7 +38,7 @@ export default function Navbar() {
           <NavLink href="#contact" label="Contact" />
         </div>
 
-        {/* === Mobile Menu Icon === */}
+        {/* === Mobile Menu Button === */}
         <button
           className="md:hidden text-[#F5F3E7]"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -47,26 +48,35 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* === Mobile Dropdown === */}
-      {menuOpen && (
-        <div className="md:hidden flex flex-col items-center space-y-4 mt-4 pb-4 bg-[#0A1A2F]/95 border-t border-[#1C2A45]">
-          <NavLink
-            href="#projects"
-            label="Projects"
-            onClick={() => setMenuOpen(false)}
-          />
-          <NavLink
-            href="#about"
-            label="About"
-            onClick={() => setMenuOpen(false)}
-          />
-          <NavLink
-            href="#contact"
-            label="Contact"
-            onClick={() => setMenuOpen(false)}
-          />
-        </div>
-      )}
+      {/* === Animated Mobile Dropdown === */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="md:hidden flex flex-col items-center space-y-4 mt-4 pb-4 bg-[#0A1A2F]/95 border-t border-[#1C2A45]"
+          >
+            <NavLink
+              href="#projects"
+              label="Projects"
+              onClick={() => setMenuOpen(false)}
+            />
+            <NavLink
+              href="#about"
+              label="About"
+              onClick={() => setMenuOpen(false)}
+            />
+            <NavLink
+              href="#contact"
+              label="Contact"
+              onClick={() => setMenuOpen(false)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
