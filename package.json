@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "vercel-build": "chmod +x node_modules/.bin/next && next build"
+},
+
   "dependencies": {
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.548.0",
