@@ -5,13 +5,31 @@ import { useState, useEffect } from 'react';
 export default function GenesisIntro({ onFinish }) {
   const [showText, setShowText] = useState(false);
   const [fadeWhite, setFadeWhite] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const textTimer = setTimeout(() => setShowText(true), 5000);   // show at 5s
-    const fadeTimer = setTimeout(() => setFadeWhite(true), 6060);  // start fade 1s after video end
-    const doneTimer = setTimeout(() => {
-      if (onFinish) onFinish();
-    }, 7100); // fade takes ~1s now before showing site
+    // Detect mobile
+    if (typeof window !== 'undefined') {
+      const mobile = /Mobi|Android/i.test(navigator.userAgent);
+      setIsMobile(mobile);
+
+      // If mobile, skip the video and run a shortened sequence
+      if (mobile) {
+        const quickText = setTimeout(() => setShowText(true), 600);   // show almost instantly
+        const quickFade = setTimeout(() => setFadeWhite(true), 1300); // quick fade to white
+        const quickDone = setTimeout(() => onFinish?.(), 1800);       // then show site
+        return () => {
+          clearTimeout(quickText);
+          clearTimeout(quickFade);
+          clearTimeout(quickDone);
+        };
+      }
+    }
+
+    // === Desktop / Laptop Timing ===
+    const textTimer = setTimeout(() => setShowText(true), 5000);
+    const fadeTimer = setTimeout(() => setFadeWhite(true), 6060);
+    const doneTimer = setTimeout(() => onFinish?.(), 7100);
 
     return () => {
       clearTimeout(textTimer);
@@ -26,15 +44,19 @@ export default function GenesisIntro({ onFinish }) {
         fadeWhite ? 'bg-white' : 'bg-black'
       }`}
     >
-      <video
-        src="/videos/genesis.mp4"
-        autoPlay
-        muted
-        playsInline
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-          fadeWhite ? 'opacity-0' : 'opacity-100'
-        }`}
-      />
+      {/* Only render the video on non-mobile devices */}
+      {!isMobile && (
+        <video
+          src="/videos/genesis.mp4"
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            fadeWhite ? 'opacity-0' : 'opacity-100'
+          }`}
+        />
+      )}
 
       {showText && (
         <motion.h1
