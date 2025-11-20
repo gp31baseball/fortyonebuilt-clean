@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Base Page Styling === */
+html,
+body {
+  background-color: #0A1A2F;
+  color: #F5F3E7;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+/* === Typography === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;          /* bold headings */
+  letter-spacing: -0.01em;   /* tighter letter spacing */
+  margin: 0;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* === Links === */
+a {
+  color: #E4B343;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: #CDA138;
+}
+
+/* === Buttons === */
+button {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+/* === Scrollbar (Texas Gradient with Glow) === */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #C21F1F, #F5F3E7, #0A1A2F, #C21F1F);
+  background-size: 200% 200%;
+  animation: gradientShift 12s linear infinite;
+  border-radius: 9999px;
+  box-shadow: 0 0 8px rgba(228, 179, 67, 0.4);
+}
+
+::-webkit-scrollbar-track {
+  background: #0A1A2F;
+}
+
+/* === Animations === */
+
+/* Dynamic scrolling gradient in the scrollbar */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Verse text pulsing glow */
+@keyframes verseGlow {
+  0%, 100% { color: #F5F3E7; }
+  50%      { color: #C0C4CA; }
+}
+
+/* Frosted gradient background drift */
+@keyframes frostShift {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* Soft pulsing glow for hero section */
+@keyframes heroGlow {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.05);
+  }
+}
+
+/* ✨ Sparkle animation (used on site load) */
+@keyframes sparkle {
+  0%   { transform: scale(0); opacity: 0; }
+  20%  { transform: scale(1.3); opacity: 1; }
+  70%  { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(0.6); opacity: 0; }
+}
+.animate-sparkle {
+  animation: sparkle ease-out forwards;
+}
