@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { saveAnalyticsEvent } from "@/lib/norad-db";
+import { writeEvent } from "@/lib/norad-db";
+
 
 export async function POST(req: Request) {
   try {
@@ -12,7 +13,7 @@ export async function POST(req: Request) {
       );
     }
 
-    await saveAnalyticsEvent({
+    await writeEvent({
       projectId: body.projectId,
       eventType: body.eventType,
       timestamp: body.timestamp ?? Date.now(),
