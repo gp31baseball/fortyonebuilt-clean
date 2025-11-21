@@ -7,13 +7,15 @@
 };
 
 export const NORAD_SITES: NoradSite[] = [
-  {
-    id: "gp31",
-    vercelProjectId: "prj_xxx_gp31",
-    name: "GP31 Baseball",
-    slug: "gp31",
-    baseUrl: "https://gp31baseball.com",
-  },
+ {
+  id: "gp31",
+- vercelProjectId: "prj_xxx_gp31",
++ vercelProjectId: "gp31",
+  name: "GP31 Baseball",
+  slug: "gp31",
+  baseUrl: "https://gp31baseball.com",
+}
+,
   {
     id: "realtor",
     vercelProjectId: "prj_xxx_realtor",
